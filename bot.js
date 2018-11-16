@@ -18,9 +18,21 @@ bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
+    bot.setPresence({ status: 'online', game: { name: "Let's get physical" } });
 });
+
+bot.on('message', function (user, userID, channelID, message, evt){
+    tokens = message.split(' ');
+
+    if (tokens.length > 1 && tokens[0]=="!rlpresence") {
+        presence = tokens.slice(1,tokens.length).join(' ')
+        logger.info("Switching presence to: "+presence);
+        bot.setPresence({ status: 'online', game: { name: presence } });
+    }
+});
+
 bot.on('message', function (user, userID, channelID, message, evt) {
-    if (user!= bot.username && message.indexOf("/r/") > -1 && message.indexOf("hub.docker.com") == -1 ) {
+    if (user!= bot.username && message.indexOf("/r/") > -1 && message.indexOf("hub.docker.com") == -1) {
         var lines = message.split('\n')
         for(var l=0;l<lines.length;l++){
             var str=lines[l];
