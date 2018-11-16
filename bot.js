@@ -32,7 +32,7 @@ bot.on('message', function (user, userID, channelID, message, evt){
     }
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
-    if (user!= bot.username && message.indexOf("/r/") > -1) {
+    if (user!= bot.username && message.indexOf("/r/") > -1 && message.indexOf("hub.docker.com") == -1 ) {
         var lines = message.split('\n')
         for(var l=0;l<lines.length;l++){
             var str=lines[l];
