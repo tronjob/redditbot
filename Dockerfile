@@ -1,12 +1,13 @@
-FROM node:8
+FROM node:12
 MAINTAINER Pedro Oliveira
 
 RUN mkdir /var/www
 
-ADD ./package.json /var/www
-ADD ./bot.js /var/www
-ADD ./auth.json /var/www
+COPY ./package.json /var/www/
+COPY ./bot.js /var/www/
+COPY ./auth.json presenceSubreddits* /var/www/
 
 WORKDIR /var/www
-RUN npm install request winston@2 https://github.com/woor/discord.io/tarball/gateway_v6 discord.io --save
+RUN npm install
+RUN npm install https://github.com/woor/discord.io/tarball/gateway_v6 --save
 CMD ["/usr/local/bin/node", "/var/www/bot.js"]
